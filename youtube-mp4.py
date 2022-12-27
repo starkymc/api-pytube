@@ -13,19 +13,24 @@ def download_song(title, api_key):
 
     # Descarga el video utilizando pytube
     
+    
     yt = YouTube(video_url)
-    video = yt.streams.filter(progressive=True, resolution="360p").first()
-    video.download("F:/")
-    print(f"La canción {yt.title} se ha descargado con éxito.")
+    if yt:
+        video = yt.streams.filter(progressive=True, resolution="360p").first()
+
+        video.download("G:/vid")
+        #video.download("F:/")
+        print(f"La canción {yt.title} se ha descargado con éxito.")
+    
 
 # Crea una lista de títulos de canciones
 song_titles = [
-    "Rosita sandoval - chimaychi",
-    "Nicol carbajal - chimaychi",
-    "Wilder valverde - Canario pomabambino",
-    "Fuerza musical - pumacallpa",
-    "Muñequita sally - terco corazon",
-    "Mari mendoza - madrecita",
+"nancy bolo primicia 2021 huancavelicano",
+"nancy bolo 2019 HD chimaychi",
+"los hermanos bazan de conopa"
+
+   
+   
 ]
 
 # Tu clave de API de YouTube
@@ -33,10 +38,11 @@ song_titles = [
 api_key = "AIzaSyA32BGxbsXTQDF4kLjQVAehfrNgAiBHm9I"
 
 # Itera sobre cada título de la lista
-for title in song_titles:
+for i,title in enumerate(song_titles):
     # Descarga la canción utilizando la función download_song()
     try:
         download_song(title, api_key)
+        print(f"{i+1}: {title}")
     except Exception as e:
         print(f"Error al descargar la canción {title}: {e}")
 
