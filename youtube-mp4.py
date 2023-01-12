@@ -1,5 +1,8 @@
 import requests
 from pytube import YouTube
+import colorama
+from colorama import Fore
+from colorama import Style
 
 def download_song(title, api_key):
     # Utiliza la API de búsqueda de YouTube para obtener el ID del video
@@ -18,19 +21,15 @@ def download_song(title, api_key):
     if yt:
         video = yt.streams.filter(progressive=True, resolution="360p").first()
 
-        video.download("G:/vid")
+        video.download("G:/video")
         #video.download("F:/")
-        print(f"La canción {yt.title} se ha descargado con éxito.")
+        #print(f"La canción {yt.title} se ha descargado con éxito.")
+        print(Fore.BLUE + Style.BRIGHT + f"La canción {yt.title} se ha descargado con éxito." + Style.RESET_ALL)
     
 
 # Crea una lista de títulos de canciones
 song_titles = [
-"nancy bolo primicia 2021 huancavelicano",
-"nancy bolo 2019 HD chimaychi",
-"los hermanos bazan de conopa"
-
-   
-   
+ "agua marina vol -1 mix antiguas"
 ]
 
 # Tu clave de API de YouTube
@@ -42,8 +41,12 @@ for i,title in enumerate(song_titles):
     # Descarga la canción utilizando la función download_song()
     try:
         download_song(title, api_key)
-        print(f"{i+1}: {title}")
+        #print(f"{i+1}: {title}")
+        print(Fore.BLUE + Style.BRIGHT + f"{i+1}: {title}" + Style.RESET_ALL)
     except Exception as e:
-        print(f"Error al descargar la canción {title}: {e}")
+        colorama.init()
+        print(Fore.RED  + f"Error al descargar la canción {title}: {e}" + Style.RESET_ALL)
+        #print(f"Error al descargar la canción {title}: {e}")
 
-print("Se han descargado todas las canciones de la lista.")
+print(Fore.YELLOW +f"Se han descargado todas las canciones de la lista." + Style.RESET_ALL)
+
